@@ -5,9 +5,9 @@
   code should be hosted on:
   https://github.com/DarenKostov/DAK-cpp-utils
 
-  You are free to use it for any purpose, as long as it doesn't violate the GPL3 licence.
   
-
+  You are free to use it for any purpose, as long as it doesn't violate the GPL3 licence.
+  (you might want to use this if you don't have access to std::string)
 
   resources used:
   https://www.geeksforgeeks.org/operator-overloading-c/
@@ -18,7 +18,7 @@
 
 
 
-//watch out for capitalization of "text" in the comments
+//watch out for the capitalization of "text" in the comments
 //"Text" refers to the class, "text" refers to where the the char array is stored
 
 class Text{
@@ -37,16 +37,24 @@ class Text{
     Text operator+=(char*); // Concatenates the char array given to this text, returns the result
     //functions that dont modify anything
     char charAt(int)const; //returns the character at this index
-    char getCharAt(int)const; //returns the character at this index
     int len()const; //returns the length of this text
-    char* getCharArr()const; //returns the text in the form of a char array
+    char* val()const; //returns the text in the form of a char array
     Text getText()const; //returns a copy Text of the class itself (why whould you use that, just use the class itself without the getText())
     int getId()const; //returns the id of the Text, purely for debugging purposes
-  
+    //alias functions
+    char getCharAt(int)const; //returns the character at this index
+    int getLength()const; //returns the length of this text
+    char* getCharArr()const; //returns the text in the form of a char array
+    char* charArr()const; //returns the text in the form of a char array
+    
     /*
       note:
       Want to concatinate 2 Texts into a char array? Just do:
-      (text1+text2).getCharArr()
+      (text1+text2).val()
+  
+      what to concatinate 2 char arrays into a char array? just do:
+      (Text(char1)+char2).val()
+  
     */
   
   private:

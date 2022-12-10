@@ -130,11 +130,16 @@ Text Text::operator+=(Text input){
 }
 
 
+
+char Text::charAt(int i) const{
+  return text[i%length];
+}
+
 int Text::len() const{
   return length;
 }
 
-char* Text::getCharArr() const{
+char* Text::val() const{
   return text;
 }
 
@@ -144,17 +149,26 @@ Text Text::getText() const{
   return copy;
 }
 
-char Text::charAt(int i) const{
-  return text[i];
-}
-char Text::getCharAt(int i) const{
-  return charAt(i);
-}
-
 int Text::getId() const{
   return id;
 }
 
+//alias functions
 
+char Text::getCharAt(int i) const{
+  return charAt(i);
+}
+
+int Text::getLength() const{
+  return len();
+}
+
+char* Text::getCharArr() const{
+  return val();
+}
+
+char* Text::charArr() const{
+  return val();
+}
 
 
