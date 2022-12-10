@@ -105,19 +105,27 @@ Text Text::operator+(Text input){
   
 }
 
-void Text::operator+=(char* input){
+Text Text::operator+=(char* input){
   
   //use the = for Text
   //use the + operator for char
   *this=*this+input;
   
+  //output
+  Text output(*this);
+  return output;
+  
 }
 
-void Text::operator+=(Text input){
+Text Text::operator+=(Text input){
   
   //use the = for Text
   //use the + operator for Text
   *this=*this+input;
+  
+  //output
+  Text output(*this);
+  return output;
   
 }
 

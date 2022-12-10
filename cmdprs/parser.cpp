@@ -5,7 +5,7 @@
 using namespace std;
 
 
-Parser::Parser(char AllCommands[10][10][10], char AllCommandsDescription[10][50], char allCommandArgsDef[10][10][10], char AllCommandsArgs[10][20]){
+Parser::Parser(char*** AllCommands, char AllCommandsDescription[10][50], char allCommandArgsDef[10][10][10], char AllCommandsArgs[10][20]){
   for(int i=0; i<10; i++){
     strcpy(allCommandsDescription[i], AllCommandsDescription[i]);
     strcpy(allCommandsArgs[i], AllCommandsArgs[i]);
@@ -84,10 +84,10 @@ bool Parser::fixArgs(){
   for(int i=1; i<10; i++){//loop through all the inputed args
     for(int j=0; j<10; j++){//loop through all the valid args
       
-        if(allCommandArgsDef[commandIndex][]){
+//        if(allCommandArgsDef[commandIndex][]){
                 
       
-        }
+  //      }
       }
   }
   

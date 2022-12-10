@@ -15,7 +15,7 @@
 
 class Parser{
   public:
-    Parser(char AllCommands[10][10][10], char AllCommandsDescription[10][50], char allCommandArgsDef[10][10][10], char AllCommandsArgs[10][20]);
+    Parser(char*** AllCommands, char AllCommandsDescription[10][50], char allCommandArgsDef[10][10][10], char AllCommandsArgs[10][20]);
     void readLn();
     char* returnCommand(int i);
   private:
