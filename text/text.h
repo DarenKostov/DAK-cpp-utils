@@ -24,8 +24,10 @@
 class Text{
   public:
     //whenever I say char array I mean char pointer pointing to a char array
-    Text(char*); //make a Text from a char array
+
     Text(); //make an empty Text
+    Text(char); //make a Text from a single char
+    Text(char*); //make a Text from a char array
     Text(const Text&); //make a Text from a Text
     // Text(Text); //make a Text from Text, from Text, from Text that is also made from Test....
     ~Text(); //deconstructor, makes sure no memory leaks occur
