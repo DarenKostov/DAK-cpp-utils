@@ -146,7 +146,7 @@ bool Text::operator==(Text input){
 
 
 
-char Text::charAt(int i) const{
+char Text::operator[](int i) const{
   return text[i%length];
 }
 
@@ -170,6 +170,10 @@ int Text::getId() const{
 
 //alias functions
 
+char Text::charAt(int i) const{
+  // return (*this)[i];
+  return text[i%length];
+}
 char Text::getCharAt(int i) const{
   return charAt(i);
 }
