@@ -27,25 +27,25 @@ class Text{
 
     Text(); //make an empty Text
     Text(char); //make a Text from a single char
-    Text(char*); //make a Text from a char array
+    Text(const char*); //make a Text from a char array
     Text(const Text&); //make a Text from a Text
     // Text(Text); //make a Text from Text, from Text, from Text that is also made from Test....
     ~Text(); //deconstructor, makes sure no memory leaks occur
   
     Text operator+(char); //Concatenates the text and a char into a Text
-    Text operator+(char*); //Concatenates the text and char array into a Text
+    Text operator+(const char*); //Concatenates the text and char array into a Text
     Text operator+(Text); //Concatenates the 2 texts into a Text
     
     void operator=(char); //sets our text to the data in a char
-    void operator=(char*); //sets our text to the data in a char array
+    void operator=(const char*); //sets our text to the data in a char array
     void operator=(Text); //sets our text to the data in the Text input
     
     Text operator+=(char); // Concatenates the char given to this text, returns the result
-    Text operator+=(char*); // Concatenates the char array given to this text, returns the result
+    Text operator+=(const char*); // Concatenates the char array given to this text, returns the result
     Text operator+=(Text); // Concatenates the text given to this text, returns the result
     
     bool operator==(char); //returns weather the text is equal to a char
-    bool operator==(char*); //returns weather the text is equal to a char array
+    bool operator==(const char*); //returns weather the text is equal to a char array
     bool operator==(Text); //returns weather the text is equal to a text in a Text
 
     //functions that dont modify anything

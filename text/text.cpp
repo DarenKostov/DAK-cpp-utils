@@ -29,7 +29,7 @@ Text::Text(char initText){
 }
 
 //Text from char array
-Text::Text(char* initText){
+Text::Text(const char* initText){
   length=strlen(initText);
   text=new char[length+1];    
   strcpy(text, initText);
@@ -73,7 +73,7 @@ void Text::operator=(char setTo){
 
 
 //set text from char array
-void Text::operator=(char* setTo){
+void Text::operator=(const char* setTo){
   //set the size of the new text
   length=strlen(setTo); 
   
@@ -117,7 +117,7 @@ Text Text::operator+(char input){
   
 }
 
-Text Text::operator+(char* input){
+Text Text::operator+(const char* input){
 
   //the length of the output text
   int outputLength=strlen(input)+length;
@@ -170,7 +170,7 @@ Text Text::operator+=(char input){
   return output;
   
 }
-Text Text::operator+=(char* input){
+Text Text::operator+=(const char* input){
   
   //use the = for Text
   //use the + operator for char array
@@ -202,7 +202,7 @@ bool Text::operator==(char input){
   return false;
 }
 
-bool Text::operator==(char* input){
+bool Text::operator==(const char* input){
   if(0==strcmp(text, input))
     return true;
   return false;
@@ -262,5 +262,6 @@ char* Text::getCharArr() const{
 char* Text::charArr() const{
   return val();
 }
+
 
 
