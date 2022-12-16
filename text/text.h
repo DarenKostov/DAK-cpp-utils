@@ -80,6 +80,11 @@ class Text{
     */
   
   
+  // casts
+  operator char*(); //cast it to a char array, essentially the same as ".val()"
+  operator const char*(); //cast it to a char array, essentially the same as ".val()"... but a const
+  operator char(); //cast it to a single character, if the length is more than 1 itll cast the 1st character, essentally the same as "[0]" BUT you make a copy here
+  
   
   private:
     char* text; //the char array
@@ -89,6 +94,9 @@ class Text{
     
 };
 
+// char a[100]="qwerty";
+// char b[100]="qwerty";
+// bool c=a==b;
 
 //working in reverse, concatenating, setting, etc Text to other things
 

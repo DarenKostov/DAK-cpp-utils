@@ -232,7 +232,6 @@ int Text::len() const{
 char* Text::val() const{
   return text;
 }
-
 Text Text::getText() const{
   return Text(*this);
 }
@@ -261,6 +260,22 @@ char* Text::getCharArr() const{
 
 char* Text::charArr() const{
   return val();
+}
+
+
+//casting
+
+
+Text::operator char*(){
+  return this->val();
+}
+
+Text::operator const char*(){
+  return this->val();
+}
+
+Text::operator char(){
+  return (*this)[0];
 }
 
 
