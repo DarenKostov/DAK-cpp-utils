@@ -12,7 +12,10 @@
   resources used:
   https://www.geeksforgeeks.org/operator-overloading-c/
   https://stackoverflow.com/questions/56387509/this-argument-to-member-function-select-has-type-const-selectparam-but-fu
+  https://stackoverflow.com/questions/39808976/operator-overloading-for-primitive-types-in-c
 
+  http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cpp-ops.html
+  https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/
 
 */
 
@@ -32,32 +35,36 @@ class Text{
     // Text(Text); //make a Text from Text, from Text, from Text that is also made from Test....
     ~Text(); //deconstructor, makes sure no memory leaks occur
   
-    Text operator+(char); //Concatenates the text and a char into a Text
-    Text operator+(const char*); //Concatenates the text and char array into a Text
-    Text operator+(Text); //Concatenates the 2 texts into a Text
+    // plus operator
+    const Text operator+(char); //Concatenates the text and a char into a Text
+    const Text operator+(const char*); //Concatenates the text and char array into a Text
+    const Text operator+(Text); //Concatenates the 2 texts into a Text
     
-    void operator=(char); //sets our text to the data in a char
-    void operator=(const char*); //sets our text to the data in a char array
-    void operator=(Text); //sets our text to the data in the Text input
+    //equals operator
+    Text& operator=(char); //sets our text to the data in a char
+    Text& operator=(const char*); //sets our text to the data in a char array
+    Text& operator=(Text); //sets our text to the data in the Text input
     
-    Text operator+=(char); // Concatenates the char given to this text, returns the result
-    Text operator+=(const char*); // Concatenates the char array given to this text, returns the result
-    Text operator+=(Text); // Concatenates the text given to this text, returns the result
+    //plus equals operator
+    Text& operator+=(char); // Concatenates the char given to this text, returns the result
+    Text& operator+=(const char*); // Concatenates the char array given to this text, returns the result
+    Text& operator+=(Text); // Concatenates the text given to this text, returns the result
     
+    //equals equals operator
     bool operator==(char); //returns weather the text is equal to a char
     bool operator==(const char*); //returns weather the text is equal to a char array
     bool operator==(Text); //returns weather the text is equal to a text in a Text
 
     //functions that dont modify anything
-    char operator[](int) const; //returns the character at that index
+    char& operator[](int) const; //returns the character at that index; note you can set the character with this as well
     int len()const; //returns the length of this text
     char* val()const; //returns the text in the form of a char array
-    Text getText()const; //returns a copy Text of the class itself (why whould you use that, just use the class itself without the getText())
+    Text getText()const; //returns a copy Text of the class itself
     int getId()const; //returns the id of the Text, purely for debugging purposes
    
      //alias functions
-    char charAt(int)const; //returns the character at this index
-    char getCharAt(int)const; //returns the character at this index
+    char& charAt(int)const; //returns the character at this index
+    char getCharAt(int)const; //returns the character at this index; note you can NOT set the character with this
     int getLength()const; //returns the length of this text
     char* getCharArr()const; //returns the text in the form of a char array
     char* charArr()const; //returns the text in the form of a char array
@@ -72,6 +79,8 @@ class Text{
   
     */
   
+  
+  
   private:
     char* text; //the char array
     int length; //the length of the char array
@@ -79,3 +88,10 @@ class Text{
     
     
 };
+
+
+//working in reverse, concatenating, setting, etc Text to other things
+
+
+// char*& operator=(char*&, Text&);
+
