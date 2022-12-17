@@ -13,9 +13,12 @@
   https://www.geeksforgeeks.org/operator-overloading-c/
   https://stackoverflow.com/questions/56387509/this-argument-to-member-function-select-has-type-const-selectparam-but-fu
   https://stackoverflow.com/questions/39808976/operator-overloading-for-primitive-types-in-c
+  https://stackoverflow.com/questions/72142269/how-to-interpret-the-explicit-cast-operator
 
   http://courses.cms.caltech.edu/cs11/material/cpp/donnie/cpp-ops.html
   https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/
+  https://stackoverflow.com/questions/25274312/is-it-a-good-practice-to-define-c-functions-inside-header-files
+
 
 */
 
@@ -23,6 +26,9 @@
 
 //watch out for the capitalization of "text" in the comments
 //"Text" refers to the class, "text" refers to where the the char array is stored
+
+#include <iostream>
+
 
 class Text{
   public:
@@ -72,18 +78,24 @@ class Text{
     /*
       note:
       Want to concatinate 2 Texts into a char array? Just do:
-      (text1+text2).val()
+      (text1+text2).val() OR
+      (char*)(text1+text2)
   
       what to concatinate 2 char arrays into a char array? just do:
-      (Text(char1)+char2).val()
+      (Text(char1)+char2).val() OR
+      (char*)(Text(char1)+char2)
   
     */
   
   
   // casts
-  operator char*(); //cast it to a char array, essentially the same as ".val()"
-  operator const char*(); //cast it to a char array, essentially the same as ".val()"... but a const
-  operator char(); //cast it to a single character, if the length is more than 1 itll cast the 1st character, essentally the same as "[0]" BUT you make a copy here
+  explicit operator char*(); //cast it to a char array, essentially the same as ".val()"
+  explicit operator const char*(); //cast it to a char array, essentially the same as ".val()"... but a const
+  explicit operator char(); //cast it to a single character, if the length is more than 1 itll cast the 1st character, essentally the same as "[0]" BUT you make a copy here
+  
+  
+  
+  // friend std::ostream &operator <<(std::ostream&, Text&);
   
   
   private:
@@ -94,12 +106,21 @@ class Text{
     
 };
 
-// char a[100]="qwerty";
-// char b[100]="qwerty";
-// bool c=a==b;
 
-//working in reverse, concatenating, setting, etc Text to other things
+//working in reverse, concatenating, setting, etc other things with Text
+
+#ifndef w
+#define w
+std::ostream& operator<<(std::ostream&, Text); //makes Text automatically work with cout
+const Text operator+(char*, Text); //makes char*+Text possible, returns Text
+const Text operator+(char, Text); //makes char+Text possible, returns Text
+#endif
 
 
-// char*& operator=(char*&, Text&);
+/*
+  note:
+    want to set a char array to a Text?
+    You cant.
+*/
+
 

@@ -219,7 +219,7 @@ bool Text::operator==(Text input){
 
 
 
-
+//function getters
 
 char& Text::operator[](int i) const{
   return text[i%length];
@@ -280,13 +280,32 @@ Text::operator char(){
 
 
 
+
+
 //reverse operators
-/*
-char*& operator=(char*& left, Text& right){
-  strcpy(left, right.val());
-  return left;
+
+
+std::ostream &operator <<(std::ostream &stream, Text right){
+    stream << right.val();
+    return stream;
 }
-*/
+const Text operator+(char* right, Text left){
+  //use Text+char* concatenation
+  return right+left;
+} 
+const Text operator+(char left, Text right){
+  //use Text+char* concatenation
+  return right+left;
+}
+
+
+//reverse operators
+// /*
+// char*& Text::operator=(char*& left, Text& right){
+//   strcpy(left, right.val());
+//   return left;
+// }
+// */
 
 
 
