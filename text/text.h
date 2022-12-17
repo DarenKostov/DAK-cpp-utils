@@ -33,47 +33,103 @@
 class Text{
   public:
     //whenever I say char array I mean char pointer pointing to a char array
-
-    Text(); //make an empty Text
-    Text(char); //make a Text from a single char
-    Text(const char*); //make a Text from a char array
-    Text(const Text&); //make a Text from a Text
-    // Text(Text); //make a Text from Text, from Text, from Text that is also made from Test....
-    ~Text(); //deconstructor, makes sure no memory leaks occur
   
-    // plus operator
-    const Text operator+(char); //Concatenates the text and a char into a Text
-    const Text operator+(const char*); //Concatenates the text and char array into a Text
-    const Text operator+(Text); //Concatenates the 2 texts into a Text
+    //=constructors
+  
+    // make an empty Text
+    Text(); 
+  
+    // make a Text from a single char
+    Text(char); 
+  
+    // make a Text from a char array
+    Text(const char*);
+  
+    // make a Text from a Text
+    Text(const Text&);   
+  
+    // deconstructor, makes sure no memory leaks occur
+    ~Text();
+  
+    //=plus operator
+  
+    // Concatenates the text and a char into a Text
+    const Text operator+(char); 
+  
+    // Concatenates the text and char array into a Text
+    const Text operator+(const char*); 
+  
+    // Concatenates the 2 texts into a Text
+    const Text operator+(Text);     
+  
+  
+  
+    //=equals operator
+  
+    // sets our text to the data in a char
+    Text& operator=(char);
+  
+    // sets our text to the data in a char array
+    Text& operator=(const char*);
     
-    //equals operator
-    Text& operator=(char); //sets our text to the data in a char
-    Text& operator=(const char*); //sets our text to the data in a char array
-    Text& operator=(Text); //sets our text to the data in the Text input
-    
-    //plus equals operator
-    Text& operator+=(char); // Concatenates the char given to this text, returns the result
-    Text& operator+=(const char*); // Concatenates the char array given to this text, returns the result
-    Text& operator+=(Text); // Concatenates the text given to this text, returns the result
-    
-    //equals equals operator
-    bool operator==(char); //returns weather the text is equal to a char
-    bool operator==(const char*); //returns weather the text is equal to a char array
-    bool operator==(Text); //returns weather the text is equal to a text in a Text
+    // sets our text to the data in the Text input
+    Text& operator=(Text);
+      
+    //=plus equals operator
+  
+    // Concatenates the char given to this text, returns the result
+    Text& operator+=(char);
+  
+    // Concatenates the char array given to this text, returns the result
+    Text& operator+=(const char*); 
+  
+    // Concatenates the text given to this text, returns the result
+    Text& operator+=(Text);     
+  
+    //=equals equals operator
+  
+    //returns weather the text is equal to a char
+    bool operator==(char);
+  
+    //returns weather the text is equal to a char array
+    bool operator==(const char*); 
+  
+    //returns weather the text is equal to a text in a Text
+    bool operator==(Text); 
 
-    //functions that dont modify anything
-    char& operator[](int) const; //returns the character at that index; note you can set the character with this as well
-    int len()const; //returns the length of this text
-    char* val()const; //returns the text in the form of a char array
-    Text getText()const; //returns a copy Text of the class itself
-    int getId()const; //returns the id of the Text, purely for debugging purposes
+    //=getters and setters
+  
+    //returns the character at that index; reference
+    char& operator[](int) const; 
+  
+    //returns the length of this text
+    int len()const; 
+
+    //returns the text in the form of a char array
+    char* val()const; 
+  
+    //returns a copy Text of the class itself
+    Text getText()const; 
+  
+    //returns the id of the Text, purely for debugging purposes
+    int getId()const; 
    
-     //alias functions
-    char& charAt(int)const; //returns the character at this index
-    char getCharAt(int)const; //returns the character at this index; note you can NOT set the character with this
-    int getLength()const; //returns the length of this text
-    char* getCharArr()const; //returns the text in the form of a char array
-    char* charArr()const; //returns the text in the form of a char array
+    //=alias functions
+  
+    //returns the character at this index; reference
+    char& charAt(int)const; 
+  
+    //returns the character at this index
+    char getCharAt(int)const; 
+  
+    //returns the length of this text
+    int getLength()const; 
+  
+    //returns the text in the form of a char array
+    char* getCharArr()const; 
+  
+    //returns the text in the form of a char array
+    char* charArr()const; 
     
     /*
       note:
@@ -88,21 +144,29 @@ class Text{
     */
   
   
-  // casts
-  explicit operator char*(); //cast it to a char array, essentially the same as ".val()"
-  explicit operator const char*(); //cast it to a char array, essentially the same as ".val()"... but a const
-  explicit operator char(); //cast it to a single character, if the length is more than 1 itll cast the 1st character, essentally the same as "[0]" BUT you make a copy here
+  //=casts
   
+  //cast it to a char array, essentially the same as ".val()"
+  explicit operator char*(); 
   
+  //cast it to a const char array, essentially the same as ".val()"... but a const
+  explicit operator const char*(); 
   
-  // friend std::ostream &operator <<(std::ostream&, Text&);
+  //cast it to a single character, if the length is more than 1 itll cast the 1st character, essentally the same as "[0]" BUT you make a copy here
+  explicit operator char(); 
+  
   
   
   private:
-    char* text; //the char array
-    int length; //the length of the char array
-    int id; //the id of this Text, purely for debugging purposes
-    
+  
+    //the char array
+    char* text; 
+  
+    //the length of the char array
+    int length;
+  
+    //the id of this Text, purely for debugging purposes
+    int id;     
     
 };
 
@@ -111,10 +175,19 @@ class Text{
 
 #ifndef w
 #define w
-std::ostream& operator<<(std::ostream&, Text); //makes Text automatically work with cout
-const Text operator+(char*, Text); //makes char*+Text possible, returns Text
-const Text operator+(char, Text); //makes char+Text possible, returns Text
+
+
+//makes Text automatically work with cout
+std::ostream& operator<<(std::ostream&, Text);
+
+//makes char*+Text possible, returns Text
+const Text operator+(char*, Text);
+
+//makes char+Text possible, returns Text
+const Text operator+(char, Text);
+
 #endif
+
 
 
 /*
