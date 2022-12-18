@@ -181,10 +181,10 @@ class Text{
 std::ostream& operator<<(std::ostream&, Text);
 
 //makes char*+Text possible, returns Text
-const Text operator+(const char*, Text);
+Text operator+(const char*, Text);
 
 //makes char+Text possible, returns Text
-const Text operator+(char, Text);
+Text operator+(char, Text);
 
 #endif
 

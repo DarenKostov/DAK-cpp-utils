@@ -289,11 +289,11 @@ std::ostream &operator <<(std::ostream &stream, Text right){
     stream << right.val();
     return stream;
 }
-const Text operator+(const char* right, Text left){
+Text operator+(const char* right, Text left){
   //use Text+char* concatenation
   return right+left;
 } 
-const Text operator+(char left, Text right){
+Text operator+(char left, Text right){
   //use Text+char* concatenation
   return right+left;
 }
