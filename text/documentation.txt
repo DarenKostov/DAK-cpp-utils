@@ -1,7 +1,0 @@
-Text- an attempt at creating a sting like class for when you don't have access to std::string
-
-
-How to create a text object?
-
-
-
