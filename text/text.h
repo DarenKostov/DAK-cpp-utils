@@ -29,6 +29,9 @@
 
 #include <iostream>
 
+#ifndef TEXT
+#define TEXT
+
 
 class Text{
   public:
@@ -188,10 +191,6 @@ class Text{
 
 //working in reverse, concatenating, setting, etc other things with Text
 
-#ifndef w
-#define w
-
-
 //makes Text automatically work with cout
 std::ostream& operator<<(std::ostream&, Text);
 
@@ -205,7 +204,6 @@ Text operator+(char, Text);
 Text operator+(int, Text);
 Text operator+(long, Text);
 
-#endif
 
 
 
@@ -214,5 +212,6 @@ Text operator+(long, Text);
     want to set a char array to a Text?
     You cant.
 */
+#endif
 
 
