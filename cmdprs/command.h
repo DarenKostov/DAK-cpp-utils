@@ -27,7 +27,7 @@ struct Command{
   int aliasesAmount; //amount of aliases, self explanatory
   int argsAmount; //amount of arguments, self explanatory
   
-  template <class arr1, class arr>
+  template <class arr1, class arr2>
   Command(int AliasesAmount, arr1 Aliases, char* Description, int ArgsAmount, arr2 Args, char* ArgsDescription, char* LongDescription){
    
     //command aliases copy over
@@ -75,7 +75,7 @@ struct Command{
     }  
 
     //command argument definitions copy over
-    args= new Text[input.argsAmount];
+    args= new string[input.argsAmount];
     for(int i=0; i<input.argsAmount; i++){
       //copy the input into the internal variable
       args[i]=input.args[i];
@@ -101,14 +101,14 @@ struct Command{
     delete[] args;
     
     //command aliases copy over
-    aliases= new Text[in.aliasesAmount];
+    aliases= new string[in.aliasesAmount];
     for(int i=0; i<in.aliasesAmount; i++){
       //copy the input into the internal variable
       aliases[i]=in.aliases[i];
     }  
 
     //command argument definitions copy over
-    args= new Text[in.argsAmount];
+    args= new string[in.argsAmount];
     for(int i=0; i<in.argsAmount; i++){
       //copy the input into the internal variable
       args[i]=in.args[i];

@@ -14,12 +14,12 @@
 //commandIndex is the index of the inputed command (help is 0, features is 1, tips is 2, etc) 
 
 #include <vector>
+#include <string>
 
-#ifndef q
-#define q
-#include "./text.h"
 #include "./command.h"
-#endif
+
+#ifndef PARSER
+#define PARSER
 
 //watch out fot "command" capitalization in the comments
 
@@ -33,7 +33,7 @@ class Parser{
     void addCommands(std::vector<Command>); //adds Commands from a vector of Commands
     
     //removes a command given its 1st alias
-    bool removeCommand(Text);
+    bool removeCommand(std::string);
   
     void readLn();
   
@@ -43,7 +43,7 @@ class Parser{
       return *((output*)command+i);
     }
 
-    Text returnCommandT(int i);// returns what is the command/argument inputed at that index in Text form`
+    std::string returnCommandT(int i);// returns what is the command/argument inputed at that index in Text form`
     int getCommandIndex(); //returns the current command index in the Command vector
     Command commandDefAt(int);// returns what is the Command definition at an index
 
@@ -57,11 +57,11 @@ class Parser{
     
     //the command inputed
     void* command; //the current commands inputed with its inputed arguments (cast a type pointer of the type it should be)
-    Text* commandText; // the command inputed but in Text form
+    std::string* commandText; // the command inputed but in Text form
     int commandLength; // the amount of arguments inputed, believe it or not without this there is a major seg fault
   
-    bool setCurrentCommand(Text); //determines what command the user inputed, returns false if it couldnt determine
-    void fixArgs(Text*, int); // fixes the arguments inputed returns 1 for success
+    bool setCurrentCommand(std::string); //determines what command the user inputed, returns false if it couldnt determine
+    void fixArgs(std::string*, int); // fixes the arguments inputed returns 1 for success
     int commandIndex; // the current command index
     Command* currentCommandDef; // the current command inputed definition
     
@@ -69,3 +69,4 @@ class Parser{
 
 
 };
+#endif
