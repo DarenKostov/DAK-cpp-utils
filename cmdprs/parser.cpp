@@ -1,97 +1,259 @@
 #include <iostream>
+#include <vector>
+
+
+#ifndef q
+#define q
+#include "./text.h"
+#include "./command.h"
 #include "./parser.h"
-#include <cstring>
+#endif
 
 using namespace std;
 
-
-Parser::Parser(char*** AllCommands, char AllCommandsDescription[10][50], char allCommandArgsDef[10][10][10], char AllCommandsArgs[10][20]){
-  for(int i=0; i<10; i++){
-    strcpy(allCommandsDescription[i], AllCommandsDescription[i]);
-    strcpy(allCommandsArgs[i], AllCommandsArgs[i]);
-    for(int j=0; j<10; j++){
-      strcpy(allCommands[i][j], AllCommands[i][j]);   
-    
-    
-    }
-  }
+//constructor
+Parser::Parser(){
+  commandText=new Text[1];
   
-    
-    
-
-
+  char alias[100][100]={""};
+  char description[100]="";
+  char args[100][100]={""};
+  char argsDescription[100]="";
+  char extraDescription[300]="";
+  emptyCommand=Command(1, alias, description, 1, args, argsDescription, extraDescription);
+  
+  command=malloc(100);
+  
 }
 
-void Parser::readLn(){
-  cin.getline(input, 99);
+Parser::~Parser(){
+  delete[] commandText;
+  free(command);
+}
+
+//add from a Command pointer
+void Parser::addCommand(Command* input){
+  allCommands.push_back(Command(*input));
+}
+//add from a Command pointer vector
+void Parser::addCommands(vector<Command*> input){
+  for(vector<Command*>::iterator i=input.begin(); i!=input.end(); i++){
+    addCommand(*i);
+    // allCommands.push_back(**i);       
+  }
+}
+
+//add from a Command
+void Parser::addCommand(Command input){
+  allCommands.push_back(Command(input));
+}
+//add from a Command vector
+void Parser::addCommands(vector<Command> input){
+  for(vector<Command>::iterator i=input.begin(); i!=input.end(); i++){
+    addCommand(*i);
+    // allCommands.push_back(**i);       
+  }
+}
+ 
+bool Parser::removeCommand(Text in){
   
+  for(auto i=allCommands.begin(); i!=allCommands.end(); i++){
+    if(i->aliases[0]==in)
+      allCommands.erase(i);
+    return true; 
+  }
+    return false; 
+}
+
+ 
+Command Parser::commandDefAt(int i){
+  //add i to the pointer (go to index i) and derefrence it
+  return *(allCommands.begin()+i);
+}
+   
+vector<Command> Parser::getAllCommands(){
+  return allCommands;
+}
+  
+  
+
+
+void Parser::readLn(){
+  char input[99];
+  
+  char output[99][99];
+  
+  cin.getline(input, 99);
+
+  //if we press up key dont chage the comand inputed (as if you retyped it)
+  //                ^[[A
+  if(strcmp(input, "\e[A")==0)
+    return;
+
+    
   int j=0;
   int word=0;
+  
+  //loop through until you meet a /0
   for(int i=0; i<99; i++){
+    //once a you see a ' ' go to the next word
     if(input[i]==' '){
-      command[word][i-j]='\0';
+      output[word][i-j]='\0';
       j=++i;
       word++;
       //continue;
     }  
   
-    command[word][i-j]=input[i];
+    output[word][i-j]=input[i];
     
     if(input[i]=='\0'){
-      //cout <<i<<endl;
+      // word++;
       break;     
     }
   }
   
   
+  commandLength=word+1;
   
-  for(int i=word+1; i<10; i++)
-    strcpy(command[i],"=MISSING=\0");
   
-  fixCommand() && fixArgs();
+  //make a Text of all the commands separated by " "
+  Text outputText[commandLength];
+   for(int i=0; i<commandLength; i++){
+    outputText[i]=output[i];
+  }
+  
+  
+  //free the memory in the command
+  delete[] commandText;
+  
+  
+  //word is your amount of arguments
+  
+  
+  if(setCurrentCommand(Text(output[0]))){
+    //fix the command length
+    commandLength=min(commandLength, currentCommandDef->argsAmount);
+    
+    
+    commandText=new Text[commandLength];
+    fixArgs(outputText, commandLength);
+  }else{//if it could find an alias the command inputed was invalid
+    //the current command is nothing, empty
+    currentCommandDef=&emptyCommand;
+    commandText=new Text[1];
+    commandText[0]=currentCommandDef->aliases[0];
+    
+  }
+  
 }
 
-char* Parser::returnCommand(int i){
-  return command[i];
+
+Text Parser::returnCommandT(int i){
+  if(i>=commandLength)
+    return Text("");
+  return commandText[i];
 }
 
-bool Parser::fixCommand(){
+
+
+bool Parser::setCurrentCommand(Text input){
   
+  int count=0;
   bool skipErasing=false;
-  for(int j=0; j<10; j++){//proper command loop
-    for(int k=0; k<10; k++){//aliases loop
-  
-      if(0==strcmp(returnCommand(0), allCommands[j][k])){
-        cout << "$ " << allCommands[j][k] << endl;
-        strcpy(command[0], allCommands[j][0]);
-        commandIndex=j;
-        skipErasing=true;
-        break;
+  for(vector<Command>::iterator i=allCommands.begin(); i!=allCommands.end(); i++){//all commands loop
+    count++;
+    for(int j=0; j<(*i).aliasesAmount; j++){//aliases loop
+      
+      //if our cmd is any valid alias
+      if((*i).aliases[j]==input){
+        //set the curComDef to the adress of the command
+        currentCommandDef=&(*i);        
+        return true;
       }
-      if(skipErasing)
-        break;
     }
   }
-  if(!skipErasing){
-    strcpy(command[0], "=MISSING=\0");
-    return false;
-  }
-  return true;
+
+  return false;
 }
 
-bool Parser::fixArgs(){
- 
-  for(int i=1; i<10; i++){//loop through all the inputed args
-    for(int j=0; j<10; j++){//loop through all the valid args
+
+//fix with "what"
+void Parser::fixArgs(Text* what, int amount){
+  
+  for(int i=0, j=0; i<amount; i++, j++){//loop through all of the args definitions (if its int, bool, str, ect)
+
+      if(currentCommandDef->args[i]=="cmd"){
+        commandText[i]=currentCommandDef->aliases[0];
+      }else if(currentCommandDef->args[i]=="str"){
+        //do nothing, we arent using strings
+      }else if(currentCommandDef->args[i]=="txt"){
+        //do nothing it's already a Text
+        commandText[i]=what[j];
+      }else if(currentCommandDef->args[i]=="int"){
+        //convert to int
+        commandText[i]=what[j];
+      }else if(currentCommandDef->args[i]=="bool"){
+        //convert to bool
+        commandText[i]=what[j];
+      }else if(currentCommandDef->args[i]=="''"){
+        //take in whatever is in the quotes
       
-//        if(allCommandArgsDef[commandIndex][]){
-                
+        //make sure we start with empty Text
+        commandText[i]="";
       
-  //      }
-      }
+        //if we start with quotes
+        if(what[j][0]=='\''){
+          
+            //we end with quites as well?
+            if(what[j][what[j].len()-1]=='\''){ 
+              //yes?
+              //remove first and last charcter and onto the next argument
+              for(int k=1; k<what[j].len()-1; k++)
+                commandText[i]+=what[j][k];
+              continue;
+            }
+        
+        
+        
+          //no?
+          //add the word (without the starting "'") and loop until we find the ending quotes 
+        
+          for(int k=1; k<what[j].len(); k++)
+            commandText[i]+=what[j][k];
+        
+          //THIS WILL CAUSE  A SEGFAULT WHEN THE USER DOEST END WITH A QUOTE
+          //BUT THIS IS AN INTENDED FEATURE REST ASSURED
+          while(true){
+          
+          
+            //the words were initially separated by spaces
+            commandText[i]+=" ";
+          
+            //next word
+            j++;  
+          
+            //we end with quites?
+            if(what[j][what[j].len()-1]=='\''){ 
+              //yes?
+              //add the word (withut the ending ') to our argument and onto the next argument 
+              for(int k=0; k<what[j].len()-1; k++)
+                commandText[i]+=what[j][k];
+              break;
+            }
+
+            //no? add the entire word to the argument and onto the next word
+            commandText[i]+=what[j];
+          }
+        
+        
+        }
+    
+      }else
+        commandText[i]=""; 
+
+    
+    
   }
   
-  
-  return true;
 }
 
