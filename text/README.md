@@ -120,3 +120,24 @@ Each Text has also an id that is accesible with:
 
 It is purely for debugging purposes
 
+
+### Tips
+
+#### Concatinatio
+
+Whant ot concatinate 2 Texts into a char array?
+
+`(mytext+yourtext).val()` 
+
+`(char*)(mytext+yourtext)` 
+
+Want to concatinate 2 char arrays into a char array?
+
+`(Text(mytext)+yourtext)` 
+
+Want to set a char array onto to a Text? (make sure ther is enough space in the char array)
+
+`strcpy(myCharArr, mytext.val())`
+
+
+

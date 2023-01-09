@@ -148,18 +148,6 @@ class Text{
     //returns the text in the form of a char array
     char* charArr()const; 
     
-    /*
-      note:
-      Want to concatinate 2 Texts into a char array? Just do:
-      (text1+text2).val() OR
-      (char*)(text1+text2)
-  
-      what to concatinate 2 char arrays into a char array? just do:
-      (Text(char1)+char2).val() OR
-      (char*)(Text(char1)+char2)
-  
-    */
-  
   
   //=casts
   
@@ -204,14 +192,6 @@ Text operator+(char, Text);
 Text operator+(int, Text);
 Text operator+(long, Text);
 
-
-
-
-/*
-  note:
-    want to set a char array to a Text?
-    You cant.
-*/
 #endif
 
 
