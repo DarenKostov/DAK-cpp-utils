@@ -97,7 +97,7 @@ class Parser{
     bool setCurrentCommand(std::string);
   
     // fixes the arguments inputed returns 1 for success
-    void fixArgs(std::string*, int);
+    void fixArgs(std::string*, int, int);
   
     // the current command index
     int commandIndex;
@@ -109,4 +109,10 @@ class Parser{
     Command emptyCommand;
 
 };
+
+
+//give it between which chars should the string be, your string array, from where to start in the string array, and the size of the array
+string parseWithStartAndEnd(char, char, string*, int&, int);
+
+
 #endif

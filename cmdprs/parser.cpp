@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 //constructor
 Parser::Parser(){
   currentCommandString=new string[1];
@@ -125,8 +126,8 @@ void Parser::readLn(){
     
     
     currentCommandString=new string[currentCommandLength];
-    fixArgs(outputstring, currentCommandLength);
-  }else{//if it could find an alias the command inputed was invalid
+    fixArgs(outputstring, word+1, currentCommandLength);
+  }else{//if it could'nt find an alias the command inputed was invalid
     //the current command is nothing, empty
     currentCommandDef=&emptyCommand;
     currentCommandString=new string[1];
@@ -166,82 +167,117 @@ bool Parser::setCurrentCommand(string input){
 }
 
 
+/*
+
+arr  [?]        array
+arr  {?}        array
+str   ?         string
+flg  -?         flags
+cmd   ?         command
+qts  '?'        quotes
+2qs  "?"        double quotes
+
+bol  true/false boolean
+bol  yes/no     boolean 
+bol  y/n        boolean
+bol  Y/N        boolean
+
+int   ?         integer
+flt   ?         float
+
+
+
+*/
+
 //fix with "what"
-void Parser::fixArgs(string* what, int amount){
+void Parser::fixArgs(string* what, int whatSize, int amount){
   
-  for(int i=0, j=0; i<amount; i++, j++){//loop through all of the args definitions (if its int, bool, str, ect)
+  for(int i=0, j=0; i<amount && j<whatSize; i++, j++){//loop through all of the args definitions (if its int, bool, str, ect)
+      currentCommandString[i]="";
 
       if(currentCommandDef->args[i]=="cmd"){
         currentCommandString[i]=currentCommandDef->aliases[0];
       }else if(currentCommandDef->args[i]=="str"){
         //do nothing it's already a string
         currentCommandString[i]=what[j];
-      }else if(currentCommandDef->args[i]=="flags"){
-      }else if(currentCommandDef->args[i]=="()"){
-      }else if(currentCommandDef->args[i]=="[]"){
-      }else if(currentCommandDef->args[i]=="{}"){
-      }else if(currentCommandDef->args[i]=="\"\""){
-      }else if(currentCommandDef->args[i]=="<>"){
-      
       }else if(currentCommandDef->args[i]=="''"){
         //take in whatever is in the quotes
-      
-        //make sure we start with empty string
-        currentCommandString[i]="";
-      
-        //if we start with quotes
-        if(what[j][0]=='\''){
-          
-            //we end with quites as well?
-            if(what[j][what[j].length()-1]=='\''){ 
-              //yes?
-              //remove first and last charcter and onto the next argument
-              for(int k=1; k<what[j].length()-1; k++)
-                currentCommandString[i]+=what[j][k];
-              continue;
-            }
-        
-        
-        
-          //no?
-          //add the word (without the starting "'") and loop until we find the ending quotes 
-        
-          for(int k=1; k<what[j].length(); k++)
-            currentCommandString[i]+=what[j][k];
-        
-          //THIS WILL CAUSE  A SEGFAULT WHEN THE USER DOEST END WITH A QUOTE
-          //BUT THIS IS AN INTENDED FEATURE REST ASSURED
-          while(true){
-          
-          
-            //the words were initially separated by spaces
-            currentCommandString[i]+=" ";
-          
-            //next word
-            j++;  
-          
-            //we end with quites?
-            if(what[j][what[j].length()-1]=='\''){ 
-              //yes?
-              //add the word (withut the ending ') to our argument and onto the next argument 
-              for(int k=0; k<what[j].length()-1; k++)
-                currentCommandString[i]+=what[j][k];
-              break;
-            }
-
-            //no? add the entire word to the argument and onto the next word
-            currentCommandString[i]+=what[j];
-          }
-        
-        
-        }
-    
+        currentCommandString[i]=parseWithStartAndEnd('\'', '\'', what, j, whatSize);
+      }else if(currentCommandDef->args[i]=="arr"){
+        //take in whatever is in the []
+        currentCommandString[i]=parseWithStartAndEnd('[', ']', what, j, whatSize);
       }else
+    
         currentCommandString[i]=""; 
 
     
     
   }
   
+}
+
+
+
+string parseWithStartAndEnd(char start, char end, string* array, int& j, int arraySize){
+
+
+  string output="";
+
+
+  //first off, are we even starting with the start char
+
+  //we dont? just return the string itself
+  if(array[j][0]!=start){
+    return array[j];
+  }
+  
+  //if we start with with the start char
+    
+      //we end with the end char as well?
+      if(array[j][array[j].length()-1]==end){ 
+        //yes?
+        //remove first and last charcter and onto the next argument
+        for(int k=1; k<array[j].length()-1; k++)
+          output+=array[j][k];
+        return output;
+      }
+  
+  
+  
+    //no?
+    //add the word (without the starting the end chat) and loop until we find the enc char 
+  
+    for(int k=1; k<array[j].length(); k++)
+      output+=array[j][k];
+  
+    while(j<arraySize){
+    
+    
+      //the words were initially separated by spaces
+      output+=" ";
+    
+    
+      //do we end with the end char?
+      if(array[j][array[j].length()-1]==end){ 
+        //yes?
+        //add the word (withut the ending char) to our argument and onto the next argument 
+        for(int k=0; k<array[j].length()-1; k++)
+          output+=array[j][k];
+        break;
+      }
+
+      //no? add the entire word to the argument and onto the next word
+      output+=array[j];
+
+      //next word
+      j++;  
+    
+    }
+
+    return output;
+  
+
+
+
 }
 
