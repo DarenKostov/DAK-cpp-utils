@@ -12,11 +12,11 @@ using namespace std;
 Parser::Parser(){
   currentCommandString=new string[1];
   
-  char alias[100][100]={""};
-  char description[100]="";
-  char args[100][100]={""};
-  char argsDescription[100]="";
-  char extraDescription[300]="";
+  string alias[100]={""};
+  string description="";
+  string args[100]={""};
+  string argsDescription="";
+  string extraDescription="";
   emptyCommand=Command(1, alias, description, 1, args, argsDescription, extraDescription);
   
   

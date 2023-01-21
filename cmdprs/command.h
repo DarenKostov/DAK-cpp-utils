@@ -26,9 +26,10 @@ struct Command{
   string argsDescription; //what are actually the arguments, amount of apples? pears?
   int aliasesAmount; //amount of aliases, self explanatory
   int argsAmount; //amount of arguments, self explanatory
+
   
-  template <class arr1, class arr2>
-  Command(int AliasesAmount, arr1 Aliases, char* Description, int ArgsAmount, arr2 Args, char* ArgsDescription, char* LongDescription){
+  // template <class arr1, class arr2>
+  Command(int AliasesAmount, const string* Aliases, const string Description, int ArgsAmount, const string* Args, const string ArgsDescription, const string LongDescription){
    
     //command aliases copy over
     aliases= new string[AliasesAmount];
