@@ -174,16 +174,15 @@ void Parser::fixArgs(string* what, int amount){
       if(currentCommandDef->args[i]=="cmd"){
         currentCommandString[i]=currentCommandDef->aliases[0];
       }else if(currentCommandDef->args[i]=="str"){
-        //do nothing, we arent using strings
-      }else if(currentCommandDef->args[i]=="txt"){
         //do nothing it's already a string
         currentCommandString[i]=what[j];
-      }else if(currentCommandDef->args[i]=="int"){
-        //convert to int
-        currentCommandString[i]=what[j];
-      }else if(currentCommandDef->args[i]=="bool"){
-        //convert to bool
-        currentCommandString[i]=what[j];
+      }else if(currentCommandDef->args[i]=="flags"){
+      }else if(currentCommandDef->args[i]=="()"){
+      }else if(currentCommandDef->args[i]=="[]"){
+      }else if(currentCommandDef->args[i]=="{}"){
+      }else if(currentCommandDef->args[i]=="\"\""){
+      }else if(currentCommandDef->args[i]=="<>"){
+      
       }else if(currentCommandDef->args[i]=="''"){
         //take in whatever is in the quotes
       

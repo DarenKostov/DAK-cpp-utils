@@ -36,7 +36,8 @@ class Parser{
     Parser();
     ~Parser();
 
-
+    //=manage command storage
+    
     //adds a single Command from a Command POINTER
     void addCommand(Command*);
 
@@ -52,21 +53,31 @@ class Parser{
     //removes a command given its 1st alias
     bool removeCommand(std::string);
 
-    //reads in a line from the user's input
-    void readLn();
 
-    // returns what is the command/argument inputed at that index in string form
-    std::string getArgumentString(int i);
-  
-    //returns the current command index in the Command vector
-    int getCommandIndex();
-  
+    //gives all commands in the parser
+    std::vector<Command> getAllCommands();
+
     //returns what is the Command definition at an index
     Command commandDefAt(int);
     Command commandDefinitionAt(int);
 
-    //gives all commands in the parser
-    std::vector<Command> getAllCommands();
+    //returns the current command index in the Command vector
+    int getCommandIndex();
+
+
+  
+    //=manage user input
+
+    //reads in a line from the user's input
+    void readLn();
+
+    //returns what is the command/argument inputed at that index in string form
+    std::string getArgumentString(int i);
+  
+    //returns entire inputted string from the user
+    std::string getWholeString(int i);
+    std::string getWholeInputString(int i);
+  
     
   
   private:    
