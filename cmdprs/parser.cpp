@@ -171,6 +171,11 @@ bool Parser::setCurrentCommand(string input){
 
 arr  [?]        array
 arr  {?}        array
+[S]  [?S?]      array separated by S
+[S]  {?S?}      array separated by S
+
+
+
 str   ?         string
 flg  -?         flags
 cmd   ?         command
@@ -232,7 +237,9 @@ string parseWithStartAndEnd(char start, char end, string* array, int& j, int arr
   }
   
   //if we start with with the start char
-    
+  
+  
+ 
       //we end with the end char as well?
       if(array[j][array[j].length()-1]==end){ 
         //yes?
@@ -245,11 +252,13 @@ string parseWithStartAndEnd(char start, char end, string* array, int& j, int arr
   
   
     //no?
-    //add the word (without the starting the end chat) and loop until we find the enc char 
-  
+    //add the word (without the starting char) and loop until we find the enc char 
+
     for(int k=1; k<array[j].length(); k++)
       output+=array[j][k];
-  
+    j++;
+
+    
     while(j<arraySize){
     
     
@@ -260,7 +269,7 @@ string parseWithStartAndEnd(char start, char end, string* array, int& j, int arr
       //do we end with the end char?
       if(array[j][array[j].length()-1]==end){ 
         //yes?
-        //add the word (withut the ending char) to our argument and onto the next argument 
+        //add the word (without the ending char) to our argument and onto the next argument 
         for(int k=0; k<array[j].length()-1; k++)
           output+=array[j][k];
         break;
