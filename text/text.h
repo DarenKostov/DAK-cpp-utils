@@ -182,6 +182,9 @@ class Text{
 //makes Text automatically work with cout
 std::ostream& operator<<(std::ostream&, Text);
 
+//makes Text automatically work with cin
+std::istream& operator>>(std::istream&, Text&);
+
 //makes char*+Text possible, returns Text
 Text operator+(const char*, Text);
 
