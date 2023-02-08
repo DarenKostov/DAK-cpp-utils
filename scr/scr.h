@@ -27,9 +27,6 @@ class SCR{
     //the file stream
     std::fstream file;
 
-
-
-
   public:
     //constructor, takes the path to the file as an argument
     SCR(std::string);
