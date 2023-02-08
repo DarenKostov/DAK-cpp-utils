@@ -34,7 +34,7 @@ You can also do that just by the index of the column
 `reader.read(3, myOtherVector)`
 
 
-BTW the vector must be of type string
+BTW the vector must be of type std::string
 
-###### Thats pretty much it
+###### That's pretty much it
 
