@@ -23,7 +23,7 @@ int main(){
   cout << "\n";
   
   cout << "id\n";
-  vector<int> ids;
+  vector<string> ids;
   reader.read(1, ids);
   for(auto i=ids.begin(); i!=ids.end(); i++){
     cout << *i << ", " << flush;

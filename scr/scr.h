@@ -44,54 +44,10 @@ class SCR{
     int close();
 
     //reads the column at the given index and outputs the contents to a vector
-    template<class T>
-    int read(int column, std::vector<T>& output){
-      std::string line, word;
-      getline(file, line);
-
-      //loop though every line
-      while (file.good()) {
-
-          getline(file, line);
-          std::stringstream ss(line);
-          int index=0;
-        
-          //loop through every value
-          while (getline(ss, word, ',')) {
-            if(index==column)
-              output.push_back((T)word);
-
-            index++;
-        }
-      }
-    
-      //get back at the top of the file
-      file.clear();
-      file.seekg(0);
-
-      return 0;
-    
-    }
+    int read(int column, std::vector<std::string>& output);
 
     //reads the column given and outputs the contents to a vector
-    template<class T>
-    int read(std::string column, std::vector<T>& output){
-      int columnInt=-1;
-
-      int i=0;
-      for(auto ptr=columns.begin(); ptr!=columns.end(); ptr++){
-        i++;
-        if(*ptr==column){
-          columnInt=i;
-          break;
-        }
-        
-      }
-
-    return read(columnInt, output);
-
-      
-    }
+    int read(std::string column, std::vector<std::string>& output);
 
 
 

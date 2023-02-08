@@ -14,7 +14,7 @@ int main (){
 
    {
       string aliases[100]={"test", "t"};
-      string args[100]={"cmd", "''", "''"};
+      string args[100]={"cmd", "aqs", "aqs"};
       parser.addCommand(Command(2, aliases, "desc", 3, args, "any any any", "long desc"));
    }
 

@@ -19,7 +19,9 @@ SCR::SCR(string path){
   open(path);
 }
 
-SCR::SCR(){}
+SCR::SCR(){
+  //do nothing
+}
 
 
   
@@ -52,5 +54,54 @@ int SCR::close(){
   //most definitly likely not the way to do it
   return (int)(bool)file;
 }
+
+
+//read given an idex
+int SCR::read(int column, std::vector<std::string>& output){
+  std::string line, word;
+  getline(file, line);
+
+  //loop though every line
+  while (file.good()) {
+
+      getline(file, line);
+      std::stringstream ss(line);
+      int index=0;
+    
+      //loop through every value
+      while (getline(ss, word, ',')) {
+        if(index==column)
+          output.push_back(word);
+
+        index++;
+    }
+  }
+
+  //get back at the top of the file
+  file.clear();
+  file.seekg(0);
+
+  return 0;
+
+}
+
+int SCR::read(std::string column, std::vector<std::string>& output){
+  int columnInt=-1;
+
+  int i=0;
+  for(auto ptr=columns.begin(); ptr!=columns.end(); ptr++){
+    i++;
+    if(*ptr==column){
+      columnInt=i;
+      break;
+    }
+    
+  }
+
+return read(columnInt, output);
+
+  
+}
+
 
 

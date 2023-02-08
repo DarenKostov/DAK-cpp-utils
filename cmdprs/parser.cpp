@@ -169,8 +169,8 @@ bool Parser::setCurrentCommand(string input){
 
 /*
 
-arr  [?]        array
-arr  {?}        array
+arr  [?, ?]        array
+arr  {?, ?}        array
 [S]  [?S?]      array separated by S
 [S]  {?S?}      array separated by S
 
@@ -181,6 +181,7 @@ flg  -?         flags
 cmd   ?         command
 qts  '?'        quotes
 2qs  "?"        double quotes
+aqs '/"?'/"     any quotes or no quotes
 
 bol  true/false boolean
 bol  yes/no     boolean 
@@ -208,6 +209,17 @@ void Parser::fixArgs(string* what, int whatSize, int amount){
       }else if(currentCommandDef->args[i]=="''"){
         //take in whatever is in the quotes
         currentCommandString[i]=parseWithStartAndEnd('\'', '\'', what, j, whatSize);
+      }else if(currentCommandDef->args[i]=="aqs"){
+        //take in whatever is in any quotes or no quotes!
+      
+        if(what[j][0]=='"')
+          currentCommandString[i]=parseWithStartAndEnd('"', '"', what, j, whatSize);
+        else if(what[j][0]=='\'')
+          currentCommandString[i]=parseWithStartAndEnd('\'', '\'', what, j, whatSize);
+        else
+          currentCommandString[i]=what[j];
+
+      
       }else if(currentCommandDef->args[i]=="arr"){
         //take in whatever is in the []
         currentCommandString[i]=parseWithStartAndEnd('[', ']', what, j, whatSize);
