@@ -1,7 +1,7 @@
 
 
 # Text
-\- an attempt at creating a sting-like class for when you don't have access to `std::string`
+\- an attempt at creating a string-like class for when you don't have access to `std::string`
 
 ### Basics
 
@@ -88,7 +88,7 @@ You can get the `Text` in a `char array/pointer` form like this:
 
 (this returns the internal `char*`, no need to (don't) de-allocate it after usage)
 
-(also be aware that after the `Text` variable goes out of cope/is de-allocated this pointer will also be de-allocated)
+(also be aware that after the `Text` variable goes out of scope/is de-allocated this pointer will also be de-allocated)
 
     myText.val()
 
@@ -110,7 +110,7 @@ You can get the `char` at i in the `Text` by doing this:
 
 #### Misc
 
-You can also cast the `Text` to its initializable data times, excluding `int`/`long`
+You can also cast the `Text` to its initializable data types, excluding `int`/`long`
 
 (if it's casted to char it'll give you the 1st `char`)
 
@@ -129,7 +129,7 @@ It is purely for debugging purposes
 
 #### Concatinatio
 
-Want ot concatinate 2 `Texts` into a `char array/pointer`?
+Want to concatinate 2 `Texts` into a `char array/pointer`?
 
     (mytext+yourtext).val()`
 

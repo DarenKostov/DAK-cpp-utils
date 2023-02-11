@@ -22,7 +22,7 @@ You can also close that file with the `close` method
     reader.close();
 
 
-##### File reading & outputting data
+#### File reading & outputting data
 
 You can read the file's column and store it to a std::string vector using the `store` method with the columns name
 
