@@ -1,122 +1,126 @@
 
 
 # Text
-\- an attempt at creating a sting-like class for when you don't have access to std::string
+\- an attempt at creating a sting-like class for when you don't have access to `std::string`
 
 ### Basics
 
 #### Initialize
 
-You can initialize the Text with a char
+You can initialize the `Text` with a `char`
 
-`Text('a')`
+    Text('a')
 
-`Text mytext='a'`
+    Text myText='a'
 
-A char array/pointer
+A `char array/pointer`
 
-`"Text("this is a text")`
+    "Text("this is a text")
 
-`"Text mytext="this is a text"`
+    "Text myText="this is a text"
 
-An int/long
+An `int`/`long`
 
-`Text(32000)`
+    Text(32000)
 
-`Text mytext=32000`
+    Text myText=32000
 
 Initialize it empty
 
-`Text()`
+    Text()
 
-`Text mytext`
+    Text myText
 
-Or even with another Text
+Or even with another `Text`
 
-`Text(Text("this is another text"))`
+    Text(Text("this is another text"))
 
-`Text mytext=Text("this is another text")`
+    Text myText=Text("this is another text")
 
 #### Setting
 
-You can set a text to any of it's initliazable data types
+You can set a `Text` to any of it's initliazable data types
 
 
-`mytext=12321`
+    myText=12321
 
-`mytext='F'`
+    myText='F'
 
 #### Concatination
 
 ##### Without changing
 
-You can concatinate Text with any of it initliazeable data types
+You can concatinate `Text` with any of it initliazeable data types
 
-`mytext+'w'`
+    myText+'w'
 
-`mytext+"\nthis is a new line"`
+    myText+"\nthis is a new line"
 
 You can even do it the other way around
 
-`12345+mytext`
+    12345+myText
 
 ##### With changing
 
-You can also change the Text by concatinating something to it
+You can also change the `Text` by concatinating something to it
 
-`mytext+="this is a text"`
+    myText+="this is a text"
 
 #### Comparison
 
-You can compare a Text with any of its initlizable data types except int/long
+You can compare a `Text` with any of its initlizable data types except `int`/`long`
 
-`bool cmpr= mytext=="yet another text"`
+    bool cmpr= myText=="yet another text"
 
-`bool cmpr= mytext==yourtext`
+    bool cmpr= myText==yourText
 
-`bool cmpr= 'q'==mytext`
+    bool cmpr= 'q'==myText
 
 #### Get properties
 
-You can get the length of a Text (the '\0' not included) like this:
+You can get the length of a `Text` (the `'\0'` not included) like this:
 
-`mytext.len()`
+    myText.len()
 
-`mytext.getLength()`
+    myText.getLength()
 
-You can get the Text in a char array/pointer form like this:
+You can get the `Text` in a `char array/pointer` form like this:
 
-`mytext.val()`
+(this returns the internal `char*`, no need to (don't) de-allocate it after usage)
 
-`mytext.charArr()`
+(also be aware that after the `Text` variable goes out of cope/is de-allocated this pointer will also be de-allocated)
 
-`mytext.getCharArr()`
+    myText.val()
 
-You can get the char at i in the Text by doing this:
+    myText.charArr()
+
+    myText.getCharArr()
+
+You can get the `char` at i in the `Text` by doing this:
 
 (by refence)
 
-`mytext[i]`
+    myText[i]
 
-`mytext.charAt(i)`
+    myText.charAt(i)
 
 (by value)
 
-`mytext.getCharAt(i)`
+    myText.getCharAt(i)
 
 #### Misc
 
-You can also cast the Text to its initializable data times, excluding int/long
+You can also cast the `Text` to its initializable data times, excluding `int`/`long`
 
-(if it's casted to char it'll give you the 1st char)
+(if it's casted to char it'll give you the 1st `char`)
 
-`(char)Text`
+    (char)Text
 
-`(char*)Text`
+    (char*)Text
 
-Each Text has also an id that is accesible with:
+Each `Text` has also an `id` that is accesible with:
 
-`mytext.getId()`
+    myText.getId()
 
 It is purely for debugging purposes
 
@@ -125,19 +129,19 @@ It is purely for debugging purposes
 
 #### Concatinatio
 
-Whant ot concatinate 2 Texts into a char array?
+Want ot concatinate 2 `Texts` into a `char array/pointer`?
 
-`(mytext+yourtext).val()` 
+    (mytext+yourtext).val()`
 
-`(char*)(mytext+yourtext)` 
+    (char*)(mytext+yourtext)`
 
-Want to concatinate 2 char arrays into a char array?
+Want to concatinate 2 `char arrays/pointers` into a `char array/pointer`?
 
-`(Text(mytext)+yourtext)` 
+    (Text(myCharArr)+yourCharArr).val()`
 
-Want to set a char array onto to a Text? (make sure ther is enough space in the char array)
+Want to set a `char array/pointer` to a `Text`? (make sure there is enough memory in the `char array/pointer`)
 
-`strcpy(myCharArr, mytext.val())`
+    strcpy(myCharArr, myText.val())
 
 
 

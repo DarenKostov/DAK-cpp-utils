@@ -26,7 +26,7 @@ You can also close that file with the `close` method
 
 You can read the file's column and store it to a std::string vector using the `store` method with the columns name
 
-    reader.store("criteriaA", myVector);
+    reader.store("Criteria A", myVector);
 
 
 You can also do that just by the index of the column
