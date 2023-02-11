@@ -6,7 +6,7 @@
   https://github.com/DarenKostov/DAK-cpp-utils
 
   
-  You are free to use it for any purpose, as long as it doesn't violate the GPL3 licence.
+  You are free to use it for any purpose, as long as it doesn't violate the GPLv3 licence.
   (you might want to use this if you don't have access to std::string)
 
   resources used:

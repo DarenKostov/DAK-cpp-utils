@@ -57,7 +57,7 @@ int SCR::close(){
 
 
 //read given an idex
-int SCR::read(int column, std::vector<std::string>& output){
+int SCR::store(int column, std::vector<std::string>& output){
   std::string line, word;
   getline(file, line);
 
@@ -85,7 +85,7 @@ int SCR::read(int column, std::vector<std::string>& output){
 
 }
 
-int SCR::read(std::string column, std::vector<std::string>& output){
+int SCR::store(std::string column, std::vector<std::string>& output){
   int columnInt=-1;
 
   int i=0;
@@ -98,7 +98,7 @@ int SCR::read(std::string column, std::vector<std::string>& output){
     
   }
 
-return read(columnInt, output);
+return store(columnInt, output);
 
   
 }

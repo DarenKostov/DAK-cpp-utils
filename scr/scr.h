@@ -40,11 +40,11 @@ class SCR{
     //closes the file that is open, returns 0 if success
     int close();
 
-    //reads the column at the given index and outputs the contents to a vector
-    int read(int column, std::vector<std::string>& output);
+    //stores the column data at the given index in a std::string vector
+    int store(int column, std::vector<std::string>& output);
 
-    //reads the column given and outputs the contents to a vector
-    int read(std::string column, std::vector<std::string>& output);
+    //stores the column data in a std::string vector
+    int store(std::string column, std::vector<std::string>& output);
 
 
 

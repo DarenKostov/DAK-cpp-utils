@@ -22,19 +22,18 @@ You can also close that file with the "close" method
 `reader.close();`
 
 
-##### File reading
+##### File reading & outputting data
 
-You can read the file's columns and output them to a string vector using the read method with the columns name
+You can read the file's column and store it to a std::string vector using the store method with the columns name
 
-`reader.read("criteriaA", myVector)`
+`reader.store("criteriaA", myVector)`
 
 
 You can also do that just by the index of the column
 
-`reader.read(3, myOtherVector)`
+`reader.store(3, myOtherVector)`
 
 
-BTW the vector must be of type std::string
 
 ###### That's pretty much it
 
