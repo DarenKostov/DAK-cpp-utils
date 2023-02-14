@@ -308,6 +308,27 @@ bool Text::operator==(Text input){
 }
 
 
+//==NOT EQUALS OPERATOR==\\
+
+bool Text::operator!=(char input){
+  if(text[0]==input && text[1]=='\0')
+    return false;
+  return true;
+}
+
+bool Text::operator!=(const char* input){
+  if(0!=strcmp(text, input))
+    return true;
+  return false;
+}
+
+bool Text::operator!=(Text input){
+  //use the == operator for char*
+  if(input!=text)
+    return true;
+  return false;
+}
+
 
 //function getters
 
@@ -374,9 +395,36 @@ Text::operator char(){
 
 
 
+//compatability overloads
 
-//reverse operators
 
+bool getline (std::istream& is, Text& txt, char separator){
+
+  //empty the word before we work with it
+  txt="";
+
+  //we are at the end? tell the user so
+  if(is.eof()){
+    return false;
+  }
+  
+  //add characters until the separator or end of file
+  while(is.peek()!=separator && is.peek()!=EOF){
+
+    txt+=(char)is.get();
+    
+  }
+  
+  //go past the separator
+  is.get();
+  
+  return true;
+}
+
+
+bool getline (std::istream& is, Text& txt){
+  return getline(is, txt, '\n');
+}
 
 std::ostream &operator <<(std::ostream &stream, Text right){
     stream << right.val();
@@ -392,6 +440,9 @@ std::istream &operator >>(std::istream &stream, Text& right){
           
     return stream;
 }
+
+
+//reverse operators
 
 
 Text operator+(const char* left, Text right){
