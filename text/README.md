@@ -15,9 +15,9 @@ You can initialize the `Text` with a `char`
 
 A `char array/pointer`
 
-    "Text("this is a text")
+    Text("this is a text")
 
-    "Text myText="this is a text"
+    Text myText="this is a text"
 
 An `int`/`long`
 
