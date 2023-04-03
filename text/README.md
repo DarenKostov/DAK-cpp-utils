@@ -131,13 +131,13 @@ It is purely for debugging purposes
 
 Want to concatinate 2 `Texts` into a `char array/pointer`?
 
-    (mytext+yourtext).val()`
+    (mytext+yourtext).val()
 
-    (char*)(mytext+yourtext)`
+    (char*)(mytext+yourtext)
 
 Want to concatinate 2 `char arrays/pointers` into a `char array/pointer`?
 
-    (Text(myCharArr)+yourCharArr).val()`
+    (Text(myCharArr)+yourCharArr).val()
 
 Want to set a `char array/pointer` to a `Text`? (make sure there is enough memory in the `char array/pointer`)
 
