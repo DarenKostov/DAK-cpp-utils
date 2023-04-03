@@ -127,7 +127,7 @@ It is purely for debugging purposes
 
 ### Tips
 
-#### Concatinatio
+#### Concatination
 
 Want to concatinate 2 `Texts` into a `char array/pointer`?
 
