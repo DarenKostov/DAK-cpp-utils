@@ -56,7 +56,7 @@ int main(){
   std::cout << (Text('j')=="j"? "true" : "false") << '\n';
 
 
-  //std::cout & cout overloads
+  //std::cout & std::cin overloads
 
   std::cout << thisText.val() << '\n';//vs
   std::cout << thisText << '\n';//vs
