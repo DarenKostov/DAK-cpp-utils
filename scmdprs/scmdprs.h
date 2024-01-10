@@ -4,7 +4,6 @@
   Simpler CoMmanD PaRSer
 
   Licence: GPLv3
-  The code should be hosted on https://github.com/DarenKostov/DAK-cpp-utils
   
   Simple CoMmanD PaRSer
 
@@ -15,6 +14,7 @@
 #ifndef SCMDPRS
 #define SCMDPRS
 
+#include <string>
 #include <vector>
 #include <iostream>
 
