@@ -10,7 +10,6 @@
 
 #include "vectorUtils.hxx"
 #include <algorithm>
-#include <algorithm>
 
 template <class T>
 bool vectUtil::removeAtIndex(std::vector<T>& vect, size_t index){

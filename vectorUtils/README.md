@@ -1,7 +1,7 @@
 
 
 # Vector Utils
-\- Some functions (shorcuts (not macros)) that I was too tired (lazy) to rewrite each time I needed to perform a vector operation
+\- Some functions (shortcuts (not macros)) that I was too tired (lazy) to rewrite each time I needed to perform a vector operation
 
 
 #### How to use
